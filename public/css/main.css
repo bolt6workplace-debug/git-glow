@@ -57,6 +57,14 @@ body {
   flex-shrink: 0;
 }
 
+/* Desktop: hide wine bars — full-bleed floral layout */
+@media (min-width: 641px) {
+  .site-header,
+  .site-footer {
+    display: none;
+  }
+}
+
 /* ── Page wrapper — fills remaining height between header and footer ── */
 .page {
   position: relative;
@@ -66,6 +74,13 @@ body {
   justify-content: center;
   align-items: center;
   padding: 0 16px;
+}
+
+@media (min-width: 641px) {
+  .page {
+    min-height: 100vh;
+    padding: 48px 16px;
+  }
 }
 
 /* ── Center panel — semi-transparent so the global floral-bg shows through ── */
@@ -80,7 +95,6 @@ body {
   box-shadow:
     0 24px 64px rgba(61, 13, 28, 0.14),
     0 4px 16px rgba(61, 13, 28, 0.08);
-  /* flowers visible because panel-bg is ~58% transparent — the fixed floral-bg bleeds through */
   overflow: hidden;
   margin: 32px 0;
 }
@@ -275,13 +289,13 @@ body {
 
 /* ── Mobile ── */
 @media (max-width: 640px) {
-  :root { --header-h: 64px; }
-  .page { align-items: flex-start; padding: 0 12px; }
+  :root { --header-h: 48px; }
+  .page { align-items: flex-start; padding: 0; }
   .panel {
     margin: 0;
-    border-radius: var(--radius-lg);
+    border-radius: 0;
     width: 100%;
-    min-height: calc(100vh - 128px);
+    min-height: calc(100vh - 96px);
   }
   .panel-inner { padding: 48px 28px 44px; }
   .panel-title { font-size: 36px; }
