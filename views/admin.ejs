@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin - Invitation Manager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/admin.css" />
+</head>
+<body>
+  <div class="floral-bg" aria-hidden="true"></div>
+
+  <header class="site-header" aria-hidden="true"></header>
+
+  <main class="page admin-page">
+    <section class="panel admin-panel">
+      <div class="panel-inner">
+        <h1 class="panel-title admin-title">Admin Panel</h1>
+
+        <% if (!authed) { %>
+          <form class="admin-form login-form" method="POST" action="/admin/login">
+            <label class="field">
+              <span class="field-label">Password</span>
+              <input class="field-input" type="password" name="password" placeholder="Enter admin password" required autofocus />
+            </label>
+            <% if (error) { %>
+              <p class="form-error"><%= error %></p>
+            <% } %>
+            <button class="btn-gold" type="submit">Log In</button>
+          </form>
+        <% } else { %>
+          <p class="admin-subtitle">Edit invitation details. Changes are saved immediately and visible on the live site.</p>
+
+          <% if (success) { %>
+            <p class="form-success"><%= success %></p>
+          <% } %>
+
+          <form class="admin-form" method="POST" action="/admin/save">
+            <input type="hidden" name="password" value="admin0123" />
+
+            <label class="field">
+              <span class="field-label">Website Title</span>
+              <input class="field-input" type="text" name="siteTitle" value="<%= data.siteTitle %>" required />
+            </label>
+
+            <label class="field">
+              <span class="field-label">Heading</span>
+              <input class="field-input" type="text" name="heading" value="<%= data.heading %>" required />
+            </label>
+
+            <label class="field">
+              <span class="field-label">Description</span>
+              <textarea class="field-input field-textarea" name="description" rows="5" required><%= data.description %></textarea>
+            </label>
+
+            <label class="field">
+              <span class="field-label">Countdown Target (date & time)</span>
+              <input class="field-input" type="datetime-local" name="countdownTarget" value="<%= data.countdownTarget %>" required />
+            </label>
+
+            <div class="field-row">
+              <label class="field">
+                <span class="field-label">Event Date</span>
+                <input class="field-input" type="text" name="eventDate" value="<%= data.eventDate %>" required />
+              </label>
+              <label class="field">
+                <span class="field-label">Event Time</span>
+                <input class="field-input" type="text" name="eventTime" value="<%= data.eventTime %>" required />
+              </label>
+            </div>
+
+            <label class="field">
+              <span class="field-label">Event Venue</span>
+              <input class="field-input" type="text" name="eventVenue" value="<%= data.eventVenue %>" required />
+            </label>
+
+            <label class="field">
+              <span class="field-label">Button Text</span>
+              <input class="field-input" type="text" name="buttonText" value="<%= data.buttonText %>" required />
+            </label>
+
+            <div class="admin-actions">
+              <button class="btn-gold" type="submit">Save Changes</button>
+              <a class="btn-ghost" href="/">View Site</a>
+            </div>
+          </form>
+        <% } %>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" aria-hidden="true"></footer>
+</body>
+</html>

@@ -1,0 +1,303 @@
+:root {
+  --pink-bg: #FAECEF;
+  --wine-1: #8B2040;
+  --wine-2: #6B1530;
+  --wine-deep: #3D0D1C;
+  --wine-bar: #8B1C3A;
+  --gold-1: #C9A24B;
+  --gold-2: #B5882C;
+  --gold-3: #DDB84A;
+  --panel-bg: rgba(255, 245, 248, 0.58);
+  --panel-solid: #FFF6F7;
+  --ink: #2A1018;
+  --ink-soft: #6B3545;
+  --radius-lg: 28px;
+  --radius-md: 18px;
+  --radius-sm: 12px;
+  --font-serif: 'Cormorant Garamond', 'Georgia', serif;
+  --font-sans: 'Jost', 'Helvetica Neue', Arial, sans-serif;
+  --header-h: 72px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-sans);
+  color: var(--ink);
+  background: var(--pink-bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ── Full-page floral background (shows through the transparent panel) ── */
+.floral-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image: url('/floral-pattern.svg');
+  background-size: 500px 500px;
+  background-repeat: repeat;
+  pointer-events: none;
+}
+
+/* ── Wine header / footer bars ── */
+.site-header,
+.site-footer {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: var(--header-h);
+  background: var(--wine-bar);
+  flex-shrink: 0;
+}
+
+/* ── Page wrapper — fills remaining height between header and footer ── */
+.page {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 16px;
+}
+
+/* ── Center panel — semi-transparent so the global floral-bg shows through ── */
+.panel {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 700px;
+  background: var(--panel-bg);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow:
+    0 24px 64px rgba(61, 13, 28, 0.14),
+    0 4px 16px rgba(61, 13, 28, 0.08);
+  /* flowers visible because panel-bg is ~58% transparent — the fixed floral-bg bleeds through */
+  overflow: hidden;
+  margin: 32px 0;
+}
+
+.panel-inner {
+  padding: 72px 64px 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* ── Eyebrow ── */
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--wine-1);
+  margin-bottom: 16px;
+  opacity: 0.8;
+}
+
+/* ── Heading ── */
+.panel-title {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 52px;
+  line-height: 1.1;
+  color: var(--wine-deep);
+  margin-bottom: 22px;
+  letter-spacing: -0.01em;
+}
+
+/* ── Description ── */
+.panel-desc {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--ink-soft);
+  max-width: 480px;
+  margin-bottom: 38px;
+  white-space: pre-line;
+}
+
+/* ── Gold button ── */
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, var(--gold-3) 0%, var(--gold-1) 50%, var(--gold-2) 100%);
+  color: #fff;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  padding: 18px 52px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow:
+    0 8px 24px rgba(181, 136, 44, 0.38),
+    inset 0 1px 0 rgba(255,255,255,0.3);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  min-width: 260px;
+  text-align: center;
+}
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(181, 136, 44, 0.46), inset 0 1px 0 rgba(255,255,255,0.35);
+}
+.btn-gold:active { transform: translateY(0); }
+.btn-icon { width: 18px; height: 18px; flex-shrink: 0; }
+
+/* ── Countdown pill ── */
+.countdown {
+  display: inline-flex;
+  align-items: center;
+  background: var(--wine-bar);
+  border-radius: 999px;
+  padding: 14px 28px;
+  margin-top: 30px;
+  margin-bottom: 42px;
+  box-shadow: 0 6px 20px rgba(61, 13, 28, 0.3);
+  gap: 0;
+}
+
+.cd-unit {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  padding: 0 10px;
+}
+.cd-unit:not(:last-child) {
+  border-right: 1px solid rgba(255,255,255,0.2);
+}
+
+.cd-num {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 30px;
+  color: #fff;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.cd-label {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.72);
+  margin-left: 2px;
+  align-self: flex-end;
+  margin-bottom: 2px;
+}
+
+/* ── Event details ── */
+.event-details {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 0 28px;
+  flex: 1;
+  min-width: 100px;
+}
+
+.detail-icon {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.detail-icon svg { width: 100%; height: 100%; }
+
+.detail-label {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--wine-1);
+  line-height: 1;
+}
+
+.detail-value {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.divider-v {
+  width: 1px;
+  height: 60px;
+  align-self: center;
+  background: linear-gradient(180deg, transparent, rgba(139,32,64,0.3), transparent);
+}
+
+/* ── Ghost button ── */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 32px;
+  border: 1.5px solid var(--wine-1);
+  color: var(--wine-deep);
+  text-decoration: none;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.22s ease, color 0.22s ease;
+}
+.btn-ghost:hover { background: var(--wine-deep); color: #fff; border-color: var(--wine-deep); }
+
+/* ── Mobile ── */
+@media (max-width: 640px) {
+  :root { --header-h: 64px; }
+  .page { align-items: flex-start; padding: 0 12px; }
+  .panel {
+    margin: 0;
+    border-radius: var(--radius-lg);
+    width: 100%;
+    min-height: calc(100vh - 128px);
+  }
+  .panel-inner { padding: 48px 28px 44px; }
+  .panel-title { font-size: 36px; }
+  .panel-desc { font-size: 14px; }
+  .cd-num { font-size: 24px; }
+  .countdown { padding: 12px 18px; }
+  .cd-unit { padding: 0 7px; }
+  .detail { padding: 0 12px; }
+  .divider-v { height: 50px; }
+}
+
+@media (max-width: 420px) {
+  .panel-inner { padding: 44px 20px 40px; }
+  .cd-num { font-size: 20px; }
+  .cd-unit { padding: 0 5px; }
+  .cd-label { font-size: 9px; }
+  .detail { padding: 0 6px; }
+  .detail-label { font-size: 15px; }
+}

@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500">
+  <defs>
+    <!-- Large 5-petal bloom, stroke only -->
+    <g id="bloom-lg">
+      <g fill="none" stroke="#A8647A" stroke-width="1.6" stroke-linejoin="round">
+        <path d="M0,-38 C10,-30 12,-14 0,0 C-12,-14 -10,-30 0,-38 Z" transform="rotate(0)"/>
+        <path d="M0,-38 C10,-30 12,-14 0,0 C-12,-14 -10,-30 0,-38 Z" transform="rotate(72)"/>
+        <path d="M0,-38 C10,-30 12,-14 0,0 C-12,-14 -10,-30 0,-38 Z" transform="rotate(144)"/>
+        <path d="M0,-38 C10,-30 12,-14 0,0 C-12,-14 -10,-30 0,-38 Z" transform="rotate(216)"/>
+        <path d="M0,-38 C10,-30 12,-14 0,0 C-12,-14 -10,-30 0,-38 Z" transform="rotate(288)"/>
+      </g>
+      <circle cx="0" cy="0" r="5.5" fill="#A8647A" opacity="0.55"/>
+      <circle cx="0" cy="0" r="2.5" fill="#7B3A50"/>
+    </g>
+
+    <!-- Medium bloom -->
+    <g id="bloom-md">
+      <g fill="none" stroke="#B07088" stroke-width="1.3" stroke-linejoin="round">
+        <path d="M0,-24 C7,-19 8,-9 0,0 C-8,-9 -7,-19 0,-24 Z" transform="rotate(0)"/>
+        <path d="M0,-24 C7,-19 8,-9 0,0 C-8,-9 -7,-19 0,-24 Z" transform="rotate(72)"/>
+        <path d="M0,-24 C7,-19 8,-9 0,0 C-8,-9 -7,-19 0,-24 Z" transform="rotate(144)"/>
+        <path d="M0,-24 C7,-19 8,-9 0,0 C-8,-9 -7,-19 0,-24 Z" transform="rotate(216)"/>
+        <path d="M0,-24 C7,-19 8,-9 0,0 C-8,-9 -7,-19 0,-24 Z" transform="rotate(288)"/>
+      </g>
+      <circle cx="0" cy="0" r="3.5" fill="#A8647A" opacity="0.5"/>
+      <circle cx="0" cy="0" r="1.5" fill="#7B3A50"/>
+    </g>
+
+    <!-- Small bud -->
+    <g id="bloom-sm">
+      <g fill="none" stroke="#B87A8A" stroke-width="1.2" stroke-linejoin="round">
+        <path d="M0,-15 C4,-12 5,-5 0,0 C-5,-5 -4,-12 0,-15 Z" transform="rotate(0)"/>
+        <path d="M0,-15 C4,-12 5,-5 0,0 C-5,-5 -4,-12 0,-15 Z" transform="rotate(72)"/>
+        <path d="M0,-15 C4,-12 5,-5 0,0 C-5,-5 -4,-12 0,-15 Z" transform="rotate(144)"/>
+        <path d="M0,-15 C4,-12 5,-5 0,0 C-5,-5 -4,-12 0,-15 Z" transform="rotate(216)"/>
+        <path d="M0,-15 C4,-12 5,-5 0,0 C-5,-5 -4,-12 0,-15 Z" transform="rotate(288)"/>
+      </g>
+      <circle cx="0" cy="0" r="2.2" fill="#B07088" opacity="0.5"/>
+    </g>
+
+    <!-- Leaf pair -->
+    <g id="leaf-pair">
+      <path d="M0,0 C8,-4 18,-1 20,7 C14,10 4,7 0,0 Z" fill="none" stroke="#A8647A" stroke-width="1.2"/>
+      <path d="M0,0 C-8,-4 -18,-1 -20,7 C-14,10 -4,7 0,0 Z" fill="none" stroke="#A8647A" stroke-width="1.2"/>
+      <path d="M0,0 L0,10" stroke="#A8647A" stroke-width="0.8" opacity="0.5"/>
+    </g>
+
+    <!-- Stem with leaves -->
+    <g id="stem">
+      <path d="M0,0 C-4,10 4,22 0,34" fill="none" stroke="#A8647A" stroke-width="1.1" opacity="0.6"/>
+      <path d="M-2,16 C-10,14 -14,8 -10,4 C-8,10 -4,14 -2,16 Z" fill="none" stroke="#A8647A" stroke-width="1" opacity="0.55"/>
+      <path d="M2,24 C10,22 14,16 10,12 C8,18 4,22 2,24 Z" fill="none" stroke="#A8647A" stroke-width="1" opacity="0.55"/>
+    </g>
+
+    <pattern id="florals" x="0" y="0" width="250" height="250" patternUnits="userSpaceOnUse">
+      <!-- Large bloom top-left quadrant -->
+      <g transform="translate(55,60)" opacity="0.6">
+        <use href="#stem" transform="translate(0,38)"/>
+        <use href="#bloom-lg"/>
+      </g>
+
+      <!-- Medium bloom bottom-right -->
+      <g transform="translate(186,168)" opacity="0.55">
+        <use href="#stem" transform="translate(0,24)"/>
+        <use href="#bloom-md"/>
+      </g>
+
+      <!-- Small bud scattered -->
+      <g transform="translate(160, 40)" opacity="0.45">
+        <use href="#bloom-sm"/>
+      </g>
+      <g transform="translate(22, 190)" opacity="0.45">
+        <use href="#bloom-sm"/>
+      </g>
+      <g transform="translate(225, 90)" opacity="0.4">
+        <use href="#bloom-sm"/>
+      </g>
+
+      <!-- Leaf pair accents -->
+      <g transform="translate(100, 148) rotate(-20)" opacity="0.35">
+        <use href="#leaf-pair"/>
+      </g>
+      <g transform="translate(220, 200) rotate(30)" opacity="0.35">
+        <use href="#leaf-pair"/>
+      </g>
+      <g transform="translate(8, 120) rotate(-10)" opacity="0.3">
+        <use href="#leaf-pair"/>
+      </g>
+
+      <!-- Tiny dot accents -->
+      <circle cx="130" cy="75" r="2" fill="#B87A8A" opacity="0.3"/>
+      <circle cx="90" cy="200" r="1.5" fill="#B87A8A" opacity="0.3"/>
+      <circle cx="240" cy="150" r="1.5" fill="#B87A8A" opacity="0.25"/>
+    </pattern>
+  </defs>
+
+  <!-- Page background fill -->
+  <rect width="500" height="500" fill="#FAECEF"/>
+  <!-- Subtle radial vignette — edges slightly richer -->
+  <radialGradient id="vig" cx="50%" cy="50%" r="70%">
+    <stop offset="0%" stop-color="#FEF4F6"/>
+    <stop offset="100%" stop-color="#F4D8DF"/>
+  </radialGradient>
+  <rect width="500" height="500" fill="url(#vig)"/>
+  <!-- Floral layer -->
+  <rect width="500" height="500" fill="url(#florals)"/>
+</svg>
