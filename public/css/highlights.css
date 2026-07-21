@@ -82,17 +82,18 @@
 .provider-btn.other     { background: #1B74E4; }
 
 .provider-icon {
-  width: 28px;
-  height: 28px;
+  width: 34px;
+  height: 34px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  background: transparent;
-  border-radius: 0;
-  padding: 0;
+  background: #fff;
+  border-radius: 8px;
+  padding: 5px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.12);
 }
-.provider-icon svg { width: 100%; height: 100%; }
+.provider-icon svg { width: 100%; height: 100%; display: block; }
 
 .provider-label {
   flex: 1;
@@ -123,5 +124,5 @@
   .highlights-panel .panel-inner { padding: 48px 24px 44px; }
   .highlights-title { font-size: 30px; }
   .provider-btn { padding: 13px 18px; font-size: 14px; gap: 14px; }
-  .provider-icon { width: 26px; height: 26px; }
+  .provider-icon { width: 32px; height: 32px; padding: 4px; }
 }
