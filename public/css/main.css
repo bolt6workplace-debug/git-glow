@@ -83,18 +83,16 @@ body {
   }
 }
 
-/* ── Center panel — semi-transparent so the global floral-bg shows through ── */
+/* ── Center panel ── */
 .panel {
   position: relative;
   z-index: 2;
   width: 100%;
   max-width: 700px;
-  background: var(--panel-bg);
+  background: rgba(255, 245, 248, 0.45);
   border-radius: var(--radius-lg);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  box-shadow:
-    0 24px 64px rgba(61, 13, 28, 0.14),
-    0 4px 16px rgba(61, 13, 28, 0.08);
+  border: none;
+  box-shadow: none;
   overflow: hidden;
   margin: 32px 0;
 }
@@ -292,9 +290,12 @@ body {
   :root { --header-h: 48px; }
   .page { align-items: flex-start; padding: 0; }
   .panel {
-    margin: 0;
-    border-radius: 0;
-    width: 100%;
+    margin-left: 10px;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    border-radius: 12px 0 0 12px;
+    width: calc(100% - 10px);
     min-height: calc(100vh - 96px);
   }
   .panel-inner { padding: 48px 28px 44px; }
