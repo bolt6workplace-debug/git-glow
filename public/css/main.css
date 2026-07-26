@@ -82,7 +82,7 @@ body {
   background-image: url('/floral-pattern.svg');
   background-size: 380px 380px;
   background-repeat: repeat;
-  opacity: 0.09;
+  opacity: 0.32;
   mix-blend-mode: multiply;
 }
 
@@ -195,7 +195,7 @@ body {
   z-index: 2;
   width: 100%;
   max-width: 640px;
-  background: rgba(255, 252, 250, 0.92);
+  background: rgba(255, 252, 250, 0.82);
   border-radius: var(--radius-xl);
   border: 1px solid var(--border);
   box-shadow:
@@ -232,13 +232,17 @@ body {
   z-index: 3;
 }
 
-/* subtle inner glow */
+/* floral pattern inside card */
 .panel::after {
   content: '';
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: radial-gradient(ellipse 70% 40% at 50% 0%, rgba(251,230,234,0.5) 0%, transparent 60%);
+  background-image: url('/floral-pattern.svg');
+  background-size: 300px 300px;
+  background-repeat: repeat;
+  opacity: 0.13;
+  mix-blend-mode: multiply;
   pointer-events: none;
   z-index: 0;
 }
