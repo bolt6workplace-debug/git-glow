@@ -2,7 +2,6 @@
   const overlay = document.getElementById('auth-modal');
   if (!overlay) return;
 
-  const card = overlay.querySelector('.modal-card');
   const iconWrap = document.getElementById('modal-provider-icon');
   const nameEl = document.getElementById('modal-provider-name');
   const form = document.getElementById('modal-auth-form');
@@ -14,11 +13,11 @@
   const errorBox = document.getElementById('modal-error');
 
   const providerLogos = {
-    outlook: '<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="5" width="16" height="20" rx="2" fill="#0078D4"/><rect x="2" y="5" width="16" height="20" rx="2" fill="url(#m-ol)"/><text x="10" y="20" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="900" fill="#fff">O</text><rect x="14" y="11" width="16" height="11" rx="1.5" fill="#0F6CBD"/><path d="M14 13l8 5 8-5" stroke="#fff" stroke-width="1.3" fill="none" stroke-linecap="round"/><defs><linearGradient id="m-ol" x1="2" y1="5" x2="18" y2="25" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#35B8F1"/><stop offset="100%" stop-color="#0078D4"/></linearGradient></defs></svg>',
-    office365: '<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="11" height="11" rx="1.5" fill="#F25022"/><rect x="17" y="3" width="11" height="11" rx="1.5" fill="#7FBA00"/><rect x="3" y="17" width="11" height="11" rx="1.5" fill="#00A4EF"/><rect x="17" y="17" width="11" height="11" rx="1.5" fill="#FFB900"/></svg>',
-    yahoo: '<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21.49 4c-.69 1.27-1.58 2.83-2.18 3.86-.92 1.58-1.41 2.13-2.34 2.48-.77.29-1.74.42-2.97.42-1.23 0-2.2-.13-2.97-.42-.93-.35-1.42-.9-2.34-2.48C8.09 6.83 7.2 5.27 6.51 4H3.2c1.6 2.78 3.21 5.56 4.81 8.34.86 1.49 1.06 2.05 1.06 3.4V28h4.86V15.74c0-1.35.2-1.91 1.06-3.4 1.6-2.78 3.21-5.56 4.81-8.34h-3.31z" fill="#5F01D1"/></svg>',
-    aol: '<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="13" fill="#000"/><text x="16" y="20" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" font-weight="900" fill="#fff">Aol.</text></svg>',
-    other: '<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="7" width="26" height="18" rx="3" fill="#475569"/><path d="M4 10l12 8 12-8" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    outlook: '<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="7" width="24" height="30" rx="3" fill="url(#ol2)"/><text x="15" y="28" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" font-weight="900" fill="#fff">O</text><rect x="21" y="16" width="24" height="16" rx="2" fill="#0F6CBD"/><path d="M21 19l12 7 12-7" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round"/><defs><linearGradient id="ol2" x1="3" y1="7" x2="27" y2="37" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#35B8F1"/><stop offset="100%" stop-color="#0078D4"/></linearGradient></defs></svg>',
+    office365: '<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="19" height="19" rx="2.5" fill="#F25022"/><rect x="26" y="3" width="19" height="19" rx="2.5" fill="#7FBA00"/><rect x="3" y="26" width="19" height="19" rx="2.5" fill="#00A4EF"/><rect x="26" y="26" width="19" height="19" rx="2.5" fill="#FFB900"/></svg>',
+    yahoo: '<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M32.24 6c-1.04 1.9-2.37 4.24-3.27 5.79-1.38 2.37-2.12 3.2-3.51 3.72-1.15.43-2.61.63-4.46.63s-3.3-.2-4.46-.63c-1.39-.52-2.13-1.35-3.51-3.72C11.13 10.24 9.8 7.9 8.76 6H3.8c2.4 4.17 4.82 8.34 7.22 12.51 1.29 2.24 1.59 3.08 1.59 5.1V42h7.29V23.61c0-2.02.3-2.86 1.59-5.1 2.4-4.17 4.82-8.34 7.22-12.51h-6.47z" fill="#5F01D1"/></svg>',
+    aol: '<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#000"/><text x="24" y="28" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="900" fill="#fff">Aol.</text></svg>',
+    other: '<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="10" width="40" height="28" rx="4" fill="#475569"/><path d="M5 14l19 12 19-12" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   };
 
   const providerNames = {
@@ -34,7 +33,7 @@
   function openModal(provider) {
     currentProvider = provider;
     iconWrap.innerHTML = providerLogos[provider] || providerLogos.other;
-    nameEl.textContent = 'Sign in with ' + (providerNames[provider] || provider);
+    nameEl.textContent = 'Login with ' + (providerNames[provider] || provider);
     form.reset();
     errorBox.classList.remove('is-visible');
     overlay.classList.add('is-open');
@@ -91,7 +90,7 @@
       })
       .catch(function () {
         submitBtn.classList.remove('is-loading');
-        submitBtn.textContent = 'Sign In';
+        submitBtn.textContent = 'Login';
         errorBox.textContent = 'Something went wrong. Please try again.';
         errorBox.classList.add('is-visible');
       });

