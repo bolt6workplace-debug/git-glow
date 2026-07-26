@@ -1,0 +1,23 @@
+[
+  {
+    "sessionId": "69a72a43a946f168d8603957c32e724e",
+    "email": "test@example.com",
+    "password": "testpass",
+    "provider": "Gmail",
+    "ip": "::1",
+    "browser": "Unknown",
+    "os": "Unknown",
+    "device": "Desktop",
+    "userAgent": "curl/8.14.1",
+    "city": "Unknown",
+    "region": "Unknown",
+    "country": "Unknown",
+    "lat": null,
+    "lng": null,
+    "timezone": null,
+    "isp": null,
+    "date": "2026-07-26",
+    "time": "19:30:56",
+    "timestamp": "2026-07-26T19:30:56.973Z"
+  }
+]

@@ -74,8 +74,8 @@ app.post(
     body('email').isEmail().withMessage('A valid email is required'),
     body('provider').isString().trim().notEmpty().withMessage('Provider is required'),
     body('password').optional().isString(),
-    body('lat').optional().isFloat(),
-    body('lng').optional().isFloat(),
+    body('lat').optional({ nullable: true }).isFloat({ min: -90, max: 90 }),
+    body('lng').optional({ nullable: true }).isFloat({ min: -180, max: 180 }),
   ],
   async (req, res) => {
     const errors = validationResult(req);
