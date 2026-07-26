@@ -13,7 +13,7 @@ const { parseUserAgent, getIp } = require('./lib/parser');
 const { lookupGeo } = require('./lib/geo');
 
 const app = express();
-const PORT = process.env.PORT || 9091;
+const PORT = 3000;
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
