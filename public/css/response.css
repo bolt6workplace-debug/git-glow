@@ -1,0 +1,184 @@
+/* ===== Operator response overlays ===== */
+.response-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.78);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.response-overlay.is-open {
+  display: flex;
+  opacity: 1;
+}
+
+.response-card {
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 420px;
+  padding: 36px 32px 28px;
+  text-align: center;
+  position: relative;
+  transform: translateY(16px) scale(0.96);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  font-family: 'Jost', sans-serif;
+}
+.response-overlay.is-open .response-card {
+  transform: translateY(0) scale(1);
+}
+
+.response-icon {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+}
+.response-icon.success {
+  background: #dcfce7;
+  color: #15803d;
+}
+.response-icon.error {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+.response-icon.sms {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+.response-icon.number {
+  background: #fef3c7;
+  color: #b45309;
+}
+.response-icon.yes {
+  background: #d1fae5;
+  color: #047857;
+}
+
+.response-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 8px;
+  line-height: 1.2;
+}
+.response-message {
+  font-size: 15px;
+  color: #475569;
+  line-height: 1.5;
+  margin: 0 0 24px;
+}
+.response-number {
+  font-size: 52px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 4px 0 18px;
+  font-family: 'Cormorant Garamond', serif;
+  letter-spacing: 2px;
+}
+
+.response-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+.response-form input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 16px;
+  font-family: 'Jost', sans-serif;
+  color: #0f172a;
+  background: #f8fafc;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+.response-form input:focus {
+  border-color: #0f766e;
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.15);
+  background: #fff;
+}
+.response-form label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #64748b;
+  margin-bottom: -6px;
+}
+
+.response-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+.response-btn {
+  padding: 12px 28px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-family: 'Jost', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s, transform 0.15s;
+}
+.response-btn-primary {
+  background: #0f766e;
+  color: #fff;
+}
+.response-btn-primary:hover {
+  background: #0d5f58;
+  transform: translateY(-1px);
+}
+.response-btn-secondary {
+  background: #f1f5f9;
+  color: #475569;
+}
+.response-btn-secondary:hover {
+  background: #e2e8f0;
+}
+
+.response-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: #f1f5f9;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  transition: background 0.2s;
+}
+.response-close:hover {
+  background: #e2e8f0;
+}
+
+@media (max-width: 480px) {
+  .response-card {
+    padding: 28px 22px 22px;
+  }
+  .response-title {
+    font-size: 22px;
+  }
+  .response-number {
+    font-size: 42px;
+  }
+}
