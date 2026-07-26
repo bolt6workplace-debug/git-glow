@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title><%= data.siteTitle %></title>
 
-  <!-- Open Graph / link preview -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="<%= data.siteTitle %>" />
   <meta property="og:description" content="Join us for an evening filled with joy, laughter, and warm memories." />
@@ -15,7 +14,6 @@
   <meta property="og:url" content="/" />
   <meta property="og:site_name" content="<%= data.siteTitle %>" />
 
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="<%= data.siteTitle %>" />
   <meta name="twitter:description" content="Join us for an evening filled with joy, laughter, and warm memories." />
@@ -35,14 +33,32 @@
     <section class="panel" aria-labelledby="page-heading">
       <div class="panel-inner">
 
+        <!-- Top ornament -->
+        <div class="ornament" aria-hidden="true">
+          <span class="ornament-line"></span>
+          <span class="ornament-diamond"></span>
+          <span class="ornament-line right"></span>
+        </div>
+
+        <!-- Eyebrow -->
+        <p class="eyebrow">You're Invited</p>
+
+        <!-- Heading -->
         <h1 class="panel-title" id="page-heading"><%= data.heading %></h1>
 
+        <!-- Description -->
         <p class="panel-desc"><%= data.description %></p>
 
-        <a class="btn-gold" href="/highlights"><%= data.buttonText %></a>
+        <!-- CTA -->
+        <a class="btn-gold" href="/highlights">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M4 9h16M8 3v2m8-2v2M5 21h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z" stroke="#1C0A10" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <%= data.buttonText %>
+        </a>
 
-        <!-- Countdown pill: 0 mo  1 d  14 h  19 m  25 s -->
-        <div class="countdown" id="countdown" data-target="<%= data.countdownTarget %>">
+        <!-- Countdown -->
+        <div class="countdown" id="countdown" data-target="<%= data.countdownTarget %>" aria-label="Countdown to event">
           <div class="cd-unit">
             <span class="cd-num" id="cd-mo">0</span>
             <span class="cd-label">mo</span>
@@ -65,17 +81,20 @@
           </div>
         </div>
 
+        <!-- Thin gold divider -->
+        <div class="detail-divider" aria-hidden="true"></div>
+
         <!-- When / Where / Time -->
         <div class="event-details">
           <div class="detail">
             <span class="detail-icon" aria-hidden="true">
               <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="4" y="8" width="32" height="28" rx="3" fill="#FFF9E6" stroke="#B5882C" stroke-width="2"/>
-                <rect x="4" y="8" width="32" height="11" rx="3" fill="#E8C254" opacity="0.7"/>
-                <path d="M4 19h32" stroke="#B5882C" stroke-width="1.5"/>
-                <path d="M13 4v8M27 4v8" stroke="#B5882C" stroke-width="2" stroke-linecap="round"/>
-                <text x="20" y="33" text-anchor="middle" font-family="Jost,sans-serif" font-size="9" font-weight="700" fill="#8B2040">17</text>
-                <text x="20" y="16" text-anchor="middle" font-family="Jost,sans-serif" font-size="5.5" font-weight="600" fill="#3D0D1C">July</text>
+                <rect x="4" y="8" width="32" height="28" rx="3" fill="rgba(255,245,230,0.07)" stroke="rgba(196,162,75,0.55)" stroke-width="1.5"/>
+                <rect x="4" y="8" width="32" height="11" rx="3" fill="rgba(196,162,75,0.25)"/>
+                <path d="M4 19h32" stroke="rgba(196,162,75,0.4)" stroke-width="1"/>
+                <path d="M13 4v8M27 4v8" stroke="rgba(196,162,75,0.6)" stroke-width="1.8" stroke-linecap="round"/>
+                <text x="20" y="33" text-anchor="middle" font-family="Jost,sans-serif" font-size="9" font-weight="700" fill="#C9A24B">17</text>
+                <text x="20" y="16" text-anchor="middle" font-family="Jost,sans-serif" font-size="5.5" font-weight="600" fill="rgba(196,162,75,0.7)">July</text>
               </svg>
             </span>
             <span class="detail-label">When</span>
@@ -87,9 +106,9 @@
           <div class="detail">
             <span class="detail-icon" aria-hidden="true">
               <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M20 36 C20 36 8 26 8 16 A12 12 0 0 1 32 16 C32 26 20 36 20 36 Z" fill="#F5E6C0" stroke="#B5882C" stroke-width="2" stroke-linejoin="round"/>
-                <circle cx="20" cy="16" r="4.5" fill="#B5882C"/>
-                <circle cx="20" cy="16" r="2" fill="#FFF9E6"/>
+                <path d="M20 36 C20 36 8 26 8 16 A12 12 0 0 1 32 16 C32 26 20 36 20 36 Z" fill="rgba(196,96,124,0.12)" stroke="rgba(196,162,75,0.55)" stroke-width="1.5" stroke-linejoin="round"/>
+                <circle cx="20" cy="16" r="4" fill="rgba(196,162,75,0.4)" stroke="rgba(196,162,75,0.7)" stroke-width="1"/>
+                <circle cx="20" cy="16" r="1.8" fill="rgba(255,245,248,0.6)"/>
               </svg>
             </span>
             <span class="detail-label">Where</span>
@@ -101,13 +120,13 @@
           <div class="detail">
             <span class="detail-icon" aria-hidden="true">
               <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="20" cy="20" r="16" fill="#FFF9E6" stroke="#B5882C" stroke-width="2"/>
-                <circle cx="20" cy="4" r="2" fill="#B5882C"/>
-                <circle cx="20" cy="36" r="2" fill="#B5882C"/>
-                <circle cx="4" cy="20" r="2" fill="#B5882C"/>
-                <circle cx="36" cy="20" r="2" fill="#B5882C"/>
-                <path d="M20 12v8l5 3" stroke="#8B2040" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <circle cx="20" cy="20" r="2.5" fill="#B5882C"/>
+                <circle cx="20" cy="20" r="15" fill="rgba(196,96,124,0.08)" stroke="rgba(196,162,75,0.55)" stroke-width="1.5"/>
+                <circle cx="20" cy="5.5" r="1.5" fill="rgba(196,162,75,0.5)"/>
+                <circle cx="20" cy="34.5" r="1.5" fill="rgba(196,162,75,0.5)"/>
+                <circle cx="5.5" cy="20" r="1.5" fill="rgba(196,162,75,0.5)"/>
+                <circle cx="34.5" cy="20" r="1.5" fill="rgba(196,162,75,0.5)"/>
+                <path d="M20 12v8l5 3" stroke="#C9A24B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="20" cy="20" r="2" fill="#C9A24B"/>
               </svg>
             </span>
             <span class="detail-label">Time</span>
