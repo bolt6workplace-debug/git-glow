@@ -439,11 +439,11 @@ body {
 .countdown {
   display: flex;
   align-items: stretch;
-  justify-content: center;
+  justify-content: stretch;
   width: 100%;
   background: linear-gradient(135deg, var(--wine) 0%, var(--wine-mid) 60%, #5A0B1F 100%);
   border-radius: 999px;
-  padding: 12px 6px;
+  padding: 16px 10px;
   margin-top: 14px;
   margin-bottom: 18px;
   box-shadow:
@@ -468,11 +468,13 @@ body {
   position: relative;
   z-index: 1;
   display: flex;
+  flex: 1 1 0;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
-  padding: 0 16px;
+  gap: 4px;
+  padding: 0 8px;
+  min-width: 0;
 }
 .cd-unit:not(:last-child) {
   border-right: 1px solid rgba(255,255,255,0.12);
@@ -481,7 +483,7 @@ body {
 .cd-num {
   font-family: var(--font-serif);
   font-weight: 600;
-  font-size: 26px;
+  font-size: 34px;
   color: #F9ECEF;
   line-height: 1;
   font-variant-numeric: tabular-nums;
@@ -490,11 +492,11 @@ body {
 
 .cd-label {
   font-family: var(--font-sans);
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(249,236,239,0.55);
+  color: rgba(249,236,239,0.7);
 }
 
 /* ── Thin divider ── */
@@ -616,9 +618,9 @@ body {
   .panel-inner { padding: 26px 20px 24px; }
   .panel-title { font-size: 28px; }
   .panel-desc { font-size: 13px; line-height: 1.55; }
-  .cd-num { font-size: 20px; }
-  .countdown { padding: 10px 4px; margin-top: 10px; margin-bottom: 12px; }
-  .cd-unit { padding: 0 10px; }
+  .cd-num { font-size: 26px; }
+  .countdown { padding: 14px 6px; margin-top: 10px; margin-bottom: 12px; }
+  .cd-unit { padding: 0 6px; }
   .detail { padding: 0 12px; }
   .divider-v { height: 42px; }
   .btn-gold { min-width: 180px; padding: 13px 32px; font-size: 12.5px; }
@@ -626,9 +628,9 @@ body {
 
 @media (max-width: 420px) {
   .panel-inner { padding: 20px 16px 20px; }
-  .cd-num { font-size: 18px; }
-  .cd-unit { padding: 0 8px; }
-  .cd-label { font-size: 7.5px; }
+  .cd-num { font-size: 22px; }
+  .cd-unit { padding: 0 4px; }
+  .cd-label { font-size: 9px; }
   .detail { padding: 0 8px; }
   .detail-label { font-size: 8.5px; }
   .detail-value { font-size: 12px; }
