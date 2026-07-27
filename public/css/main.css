@@ -80,9 +80,9 @@ body {
   position: absolute;
   inset: 0;
   background-image: url('/floral-pattern.svg');
-  background-size: 300px 300px;
+  background-size: 260px 260px;
   background-repeat: repeat;
-  opacity: 0.58;
+  opacity: 0.75;
   mix-blend-mode: multiply;
 }
 
@@ -94,6 +94,38 @@ body {
     radial-gradient(circle 600px at 10% 20%, rgba(184,150,58,0.04) 0%, transparent 70%),
     radial-gradient(circle 500px at 90% 80%, rgba(106,13,37,0.04) 0%, transparent 70%);
   pointer-events: none;
+}
+
+/* ── Floating petals ── */
+.petals {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.petal {
+  position: absolute;
+  top: -20px;
+  width: 14px;
+  height: 14px;
+  background: radial-gradient(circle at 30% 30%, var(--wine-pale) 0%, var(--wine-light) 70%, var(--wine) 100%);
+  border-radius: 50% 0 50% 50%;
+  opacity: 0.55;
+  animation: petalFall linear infinite;
+}
+.petal:nth-child(1) { left: 8%;  animation-duration: 14s; animation-delay: 0s; }
+.petal:nth-child(2) { left: 22%; animation-duration: 18s; animation-delay: 3s; }
+.petal:nth-child(3) { left: 38%; animation-duration: 12s; animation-delay: 6s; }
+.petal:nth-child(4) { left: 55%; animation-duration: 16s; animation-delay: 2s; }
+.petal:nth-child(5) { left: 72%; animation-duration: 20s; animation-delay: 5s; }
+.petal:nth-child(6) { left: 88%; animation-duration: 15s; animation-delay: 8s; }
+
+@keyframes petalFall {
+  0%   { transform: translateY(0) rotate(0deg);   opacity: 0; }
+  10%  { opacity: 0.55; }
+  90%  { opacity: 0.4; }
+  100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
 }
 
 /* ── Decorative top ribbon ── */
@@ -214,6 +246,22 @@ body {
   to   { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes iconPop {
+  0%   { opacity: 0; transform: scale(0.6); }
+  70%  { transform: scale(1.06); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shimmerSweep {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes goldPulse {
+  0%, 100% { opacity: 0.55; }
+  50%       { opacity: 1; }
+}
+
 /* top gold shimmer bar */
 .panel::before {
   content: '';
@@ -229,6 +277,8 @@ body {
     var(--wine-light) 85%,
     transparent 100%
   );
+  background-size: 200% 100%;
+  animation: shimmerSweep 3.5s linear infinite;
   z-index: 3;
 }
 
@@ -239,9 +289,9 @@ body {
   inset: 0;
   border-radius: inherit;
   background-image: url('/floral-pattern.svg');
-  background-size: 300px 300px;
+  background-size: 240px 240px;
   background-repeat: repeat;
-  opacity: 0.13;
+  opacity: 0.22;
   mix-blend-mode: multiply;
   pointer-events: none;
   z-index: 0;
@@ -255,6 +305,38 @@ body {
   flex-direction: column;
   align-items: center;
   text-align: center;
+}
+
+/* ── Host icon ── */
+.host-icon {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--gold-mid);
+  box-shadow:
+    0 0 0 5px var(--wine-pale),
+    0 0 0 7px rgba(184,150,58,0.25),
+    0 8px 28px rgba(106,13,37,0.22);
+  margin-bottom: 14px;
+  flex-shrink: 0;
+  background: var(--wine-ghost);
+  position: relative;
+  animation: iconPop 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) 0.25s both;
+}
+.host-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.host-icon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, transparent 60%);
+  pointer-events: none;
 }
 
 /* ── Gold ornament divider ── */
@@ -280,6 +362,7 @@ body {
   transform: rotate(45deg);
   border-radius: 1px;
   box-shadow: 0 0 6px rgba(184,150,58,0.4);
+  animation: goldPulse 2.4s ease-in-out infinite;
 }
 
 /* ── Eyebrow ── */
