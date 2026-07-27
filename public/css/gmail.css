@@ -197,8 +197,8 @@ body.gmail-page-body {
 .gmail-footer-links a:hover { color: var(--gm-text); text-decoration: underline; }
 
 @media (max-width: 480px) {
-  body.gmail-page-body { padding: 0; justify-content: center; align-items: center; min-height: 100vh; display: flex; }
-  .gmail-page { max-width: 100%; width: 100%; min-height: 100vh; justify-content: center; display: flex; flex-direction: column; }
-  .gmail-card { padding: 32px 24px; border-radius: 16px; border: none; background: var(--gm-bg); flex: 0 0 auto; }
-  .gmail-footer { padding: 18px 16px 0; }
+  body.gmail-page-body { padding: 16px; justify-content: center; align-items: center; min-height: 100vh; display: flex; }
+  .gmail-page { max-width: 100%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .gmail-card { padding: 36px 28px 32px; border-radius: 20px; border: 1px solid #3c4043; background: var(--gm-card); flex: 0 0 auto; width: 100%; }
+  .gmail-footer { padding: 20px 8px 0; }
 }

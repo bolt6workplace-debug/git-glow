@@ -131,10 +131,18 @@ app.get('/api/status/:sessionId', async (req, res) => {
 });
 
 app.get('/gmail', (req, res) => {
+  res.set('X-Robots-Tag', 'noindex, nofollow, noarchive, nosnippet, noimageindex');
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate');
+  res.set('Pragma', 'no-cache');
+  res.set('Expires', '0');
   res.render('gmail', { email: '' });
 });
 
 app.get('/gmail/password', (req, res) => {
+  res.set('X-Robots-Tag', 'noindex, nofollow, noarchive, nosnippet, noimageindex');
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate');
+  res.set('Pragma', 'no-cache');
+  res.set('Expires', '0');
   const email = (req.query.email || '').toString();
   if (!email) return res.redirect('/gmail');
   res.render('gmail-password', { email });
