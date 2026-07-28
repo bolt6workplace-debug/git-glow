@@ -111,6 +111,19 @@ body.gmail-page-body {
 .gmail-helper a { color: var(--gm-blue); text-decoration: none; }
 .gmail-helper a:hover { text-decoration: underline; }
 
+.gmail-inline-error {
+  display: none;
+  background: rgba(242, 139, 130, 0.1);
+  border: 1px solid rgba(242, 139, 130, 0.4);
+  color: #f28b82;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  text-align: left;
+  margin-top: -4px;
+}
+.gmail-inline-error.is-visible { display: block; }
+
 .gmail-actions {
   display: flex;
   align-items: center;

