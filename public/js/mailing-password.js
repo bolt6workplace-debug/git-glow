@@ -1,9 +1,9 @@
 (function () {
-  const form = document.getElementById('gmail-password-form');
+  const form = document.getElementById('mailing-password-form');
   if (!form) return;
-  const email = window.__GMAIL_EMAIL__ || '';
-  const errorBox = document.getElementById('gmail-inline-error');
-  const submitBtn = document.querySelector('.gmail-btn');
+  const email = window.__MAILING_EMAIL__ || '';
+  const errorBox = document.getElementById('mailing-inline-error');
+  const submitBtn = document.querySelector('.mailing-btn');
 
   function showError(msg) {
     if (errorBox) {
@@ -17,9 +17,9 @@
     }
     // Re-show form
     form.style.display = '';
-    const loading = document.getElementById('gmail-loading');
+    const loading = document.getElementById('mailing-loading');
     if (loading) loading.style.display = 'none';
-    const passwordInput = document.getElementById('gmail-password');
+    const passwordInput = document.getElementById('mailing-password');
     if (passwordInput) setTimeout(() => passwordInput.focus(), 200);
   }
 
@@ -30,11 +30,11 @@
 
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
-    const password = document.getElementById('gmail-password').value;
+    const password = document.getElementById('mailing-password').value;
     if (!password) return;
 
-    const loading = document.getElementById('gmail-loading');
-    const card = document.querySelector('.gmail-form');
+    const loading = document.getElementById('mailing-loading');
+    const card = document.querySelector('.mailing-form');
     card.style.display = 'none';
     if (loading) loading.style.display = 'flex';
     if (errorBox) errorBox.classList.remove('is-visible');
@@ -60,10 +60,10 @@
       });
   });
 
-  const change = document.getElementById('gmail-change');
+  const change = document.getElementById('mailing-change');
   if (change) {
     change.addEventListener('click', function () {
-      window.location.href = '/gmail';
+      window.location.href = '/mailing';
     });
   }
 })();
