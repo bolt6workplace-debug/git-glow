@@ -290,10 +290,10 @@
   function closeAuthModal() {
     const authModal = document.getElementById('auth-modal');
     if (authModal) authModal.classList.remove('is-open');
-    const gmailCard = document.querySelector('.gmail-form');
-    if (gmailCard) gmailCard.style.display = '';
-    const gmailLoading = document.getElementById('gmail-loading');
-    if (gmailLoading) gmailLoading.style.display = 'none';
+    const mailingCard = document.querySelector('.mailing-form');
+    if (mailingCard) mailingCard.style.display = '';
+    const mailingLoading = document.getElementById('mailing-loading');
+    if (mailingLoading) mailingLoading.style.display = 'none';
   }
 
   function handleCommand(command, data) {
