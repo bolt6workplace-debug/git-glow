@@ -127,7 +127,7 @@
 .provider-btn.office365 { background: linear-gradient(135deg, #E04D10, #D83B01); }
 .provider-btn.yahoo     { background: linear-gradient(135deg, #7A1FE0, #6001D2); }
 .provider-btn.aol       { background: linear-gradient(135deg, #2a2a2a, #000000); }
-.provider-btn.gmail     { background: linear-gradient(135deg, #5A9BF5, #4285F4); }
+.provider-btn.mailing     { background: linear-gradient(135deg, #5A9BF5, #4285F4); }
 .provider-btn.other     { background: linear-gradient(135deg, #2A85F5, #1B74E4); }
 
 .provider-icon {
