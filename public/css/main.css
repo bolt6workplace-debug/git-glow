@@ -332,9 +332,9 @@ body {
   height: 100%;
   object-fit: cover;
   display: block;
-  /* Warm the cream petals slightly toward gold while keeping the flower
-     natural and realistic. */
-  filter: saturate(1.08) sepia(0.18) hue-rotate(-8deg) brightness(1.02) contrast(1.03);
+  /* Deepen the rich red rose toward a wine tone with a warm golden cast
+     so it reads as wine mixed with gold while staying a real photograph. */
+  filter: saturate(1.18) sepia(0.2) hue-rotate(-10deg) brightness(0.9) contrast(1.08);
 }
 
 @keyframes flowerSway {
