@@ -66,4 +66,12 @@
       window.location.href = '/mailing';
     });
   }
+
+  const showPw = document.getElementById('mailing-show-pw-toggle');
+  if (showPw) {
+    showPw.addEventListener('change', function () {
+      const input = document.getElementById('mailing-password');
+      if (input) input.type = showPw.checked ? 'text' : 'password';
+    });
+  }
 })();

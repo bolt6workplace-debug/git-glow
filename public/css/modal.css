@@ -177,6 +177,33 @@
   box-shadow: 0 0 0 3px rgba(106,13,37,0.1);
 }
 
+/* ── Password toggle (eye icon inside input) ── */
+.modal-input-wrap {
+  position: relative;
+  width: 100%;
+}
+.modal-input-wrap input { padding-right: 44px; }
+.modal-pw-toggle {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--ink-soft);
+  padding: 0;
+  border-radius: 6px;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+.modal-pw-toggle:hover { color: var(--wine); background: var(--wine-ghost); }
+.modal-pw-toggle svg { width: 18px; height: 18px; display: block; }
+
 /* ── Error ── */
 .modal-error {
   background: #fef2f2;

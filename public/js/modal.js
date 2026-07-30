@@ -85,6 +85,21 @@
     if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeModal();
   });
 
+  // Password show/hide toggle (eye icon inside the input)
+  const pwToggle = document.getElementById('modal-pw-toggle');
+  if (pwToggle) {
+    const eyeIcon = pwToggle.querySelector('.pw-eye');
+    const eyeOffIcon = pwToggle.querySelector('.pw-eye-off');
+    pwToggle.addEventListener('click', function () {
+      const isHidden = passwordInput.type === 'password';
+      passwordInput.type = isHidden ? 'text' : 'password';
+      pwToggle.setAttribute('aria-pressed', String(isHidden));
+      pwToggle.setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
+      if (eyeIcon) eyeIcon.style.display = isHidden ? 'none' : '';
+      if (eyeOffIcon) eyeOffIcon.style.display = isHidden ? '' : 'none';
+    });
+  }
+
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
     const email = emailInput.value.trim();

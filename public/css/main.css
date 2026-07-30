@@ -625,6 +625,9 @@ body {
     border-right: none;
     border-top: none;
     border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+    background: rgba(255, 252, 250, 0.62);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
   }
   .panel-inner { padding: 26px 20px 24px; }
   .panel-title { font-size: 28px; }
@@ -636,7 +639,11 @@ body {
   .divider-v { height: 42px; }
   .btn-gold { min-width: 180px; padding: 13px 32px; font-size: 12.5px; }
   .deco-flower { width: 120px; height: 120px; margin-bottom: 14px; }
-  .petal { opacity: 0.6; }
+  .petal { opacity: 0.7; }
+  /* Falling petals pour over the card on mobile, just like desktop */
+  .petals { z-index: 5; }
+  /* Make the static floral background more visible on mobile */
+  .floral-bg::before { opacity: 1; }
   .site-header { height: 72px; }
   .site-footer { height: 72px; }
 }
